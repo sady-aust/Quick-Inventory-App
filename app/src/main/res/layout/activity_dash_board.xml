@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background1">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/bar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            >
+            <ImageView
+                android:id="@+id/coutomarsId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/customr"
+                android:layout_gravity="left"
+                android:clickable="true"
+                android:layout_marginLeft="40dp"
+
+                />
+            <ImageView
+                android:id="@+id/productsId"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/product"
+                android:clickable="true"
+                android:layout_marginRight="40dp"
+
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bar1">
+            <TextView
+                android:id="@+id/customersTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customers"
+                android:textColor="#FFFF"
+                android:textStyle="italic|bold"
+                android:textSize="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Products"
+                android:textColor="#FFFF"
+                android:textStyle="italic|bold"
+                android:textSize="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+
+                android:layout_marginRight="35dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bar2"
+            android:layout_below="@id/bar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+            <ImageView
+                android:id="@+id/salesOrderIV"
+                android:layout_marginLeft="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:background="@drawable/sellproducticon"
+
+
+                />
+            <ImageView
+                android:id="@+id/signOutIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/logouticon"
+                android:clickable="true"
+                android:layout_marginRight="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="40dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/bar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seles Order"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:textColor="#FFFF"
+                android:textStyle="italic|bold"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Out"
+                android:textColor="#FFFF"
+                android:textStyle="italic|bold"
+                android:textSize="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="35dp"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/bar3"
+            android:layout_below="@id/bar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            >
+            <ImageView
+                android:id="@+id/hsitoryIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/historyicon"
+                android:clickable="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="40dp"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/settingsicon"
+                android:clickable="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/bar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="History"
+                android:textColor="#FFFF"
+                android:textSize="20dp"
+                android:textStyle="italic|bold"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="40dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textColor="#FFFF"
+                android:textSize="20dp"
+                android:textStyle="italic|bold"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="35dp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bar4"
+            android:layout_below="@id/bar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/networking"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+
+                android:layout_marginLeft="40dp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/bar4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About Us"
+                android:textColor="#FFFF"
+                android:textStyle="italic|bold"
+                android:textSize="20dp"/>
+
+        </RelativeLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

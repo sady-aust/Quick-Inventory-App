@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context="com.example.android.quickinventoryapp.ActivityClasses.CustomersDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/edittextshape">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:id="@+id/customerNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Name :"
+                android:textColor="#FFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/customernamedetailsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/customerNameTV"
+                android:textColor="#FFFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/companyNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customerNameTV"
+                android:layout_marginTop="10dp"
+                android:text="Company Name :"
+                android:textColor="#FFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/companyNameDetailsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customernamedetailsTV"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/companyNameTV"
+                android:textColor="#FFFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/customerPhoneTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/companyNameTV"
+                android:layout_marginTop="10dp"
+                android:text="Phone                  :"
+                android:textColor="#FFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/phoneTVdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/companyNameDetailsTV"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/customerPhoneTV"
+                android:textColor="#FFFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/customerEmailTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customerPhoneTV"
+                android:layout_marginTop="10dp"
+                android:text="Email                    :"
+                android:textColor="#FFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/emailTvdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/phoneTVdetails"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/customerEmailTV"
+                android:textColor="#FFFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/customerAddressLine1TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customerEmailTV"
+                android:layout_marginTop="10dp"
+                android:text="AddressLine1     :"
+                android:textColor="#FFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/addressLine1TVdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/emailTvdetails"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/customerAddressLine1TV"
+                android:textColor="#FFFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/customerAddressLine2TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customerAddressLine1TV"
+                android:layout_marginTop="10dp"
+                android:text="AddressLine2     :"
+                android:textColor="#FFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/addressLine2TVdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addressLine1TVdetails"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/customerAddressLine2TV"
+                android:textColor="#FFFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/customerCityTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customerAddressLine2TV"
+                android:layout_marginTop="10dp"
+                android:text="City                       :"
+                android:textColor="#FFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/cityTVdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customerAddressLine2TV"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/customerCityTV"
+                android:textColor="#FFFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/CustomerZipCodeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customerCityTV"
+                android:layout_marginTop="10dp"
+                android:text="ZIP Code             :"
+                android:textColor="#FFF"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/zipCodeTVdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cityTVdetails"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/CustomerZipCodeTV"
+                android:textColor="#FFFF"
+                android:textSize="15dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/CustomerZipCodeTV"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/deleteCustomerbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/buttonshape"
+                    android:text=" Delete Customer "
+                    android:textColor="#FFF"
+
+
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
