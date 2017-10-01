@@ -17,6 +17,7 @@ import com.example.android.quickinventoryapp.R;
 public class SignUpAcitivity extends AppCompatActivity {
     private EditText userNameET,passWordET,shopNameET,shopOwnerNameET;
     private Button signUPBtn;
+    static String USERNAME = "UserName";
 
     DatabseHelper databseHelper;
 
@@ -35,7 +36,7 @@ public class SignUpAcitivity extends AppCompatActivity {
     }
 
     public void addUser(View view) {
-        String userName = userNameET.getText().toString().trim();
+        final String userName = userNameET.getText().toString().trim();
         String passWord = passWordET.getText().toString().trim();
         String shopName = shopNameET.getText().toString().trim();
         String shopOwnerName = shopOwnerNameET.getText().toString().trim();
@@ -55,6 +56,7 @@ public class SignUpAcitivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(SignUpAcitivity.this,DashBoardActivity.class);
+                    intent.putExtra(USERNAME,userName);
                     startActivity(intent);
                 }
             });

@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.quickinventoryapp.ActivityClasses.HistoryActivity"
-    android:background="@drawable/background1">
+    tools:context="com.example.android.quickinventoryapp.ActivityClasses.ChartActivity">
 
-    <ListView
-        android:id="@+id/historyLV"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
-
+        />
 </RelativeLayout>

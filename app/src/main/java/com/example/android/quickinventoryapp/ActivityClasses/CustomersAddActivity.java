@@ -16,11 +16,14 @@ public class CustomersAddActivity extends AppCompatActivity {
     EditText customerNameE,companyNameE,phoneE,emailE,addressLine1E,addressLine2E,cityE,zipCodeE;
     Button save;
     DatabseHelper databseHelper;
+    String u_name ="";
+    static String USERNAME = "UserName";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         databseHelper = new DatabseHelper(this);
         setContentView(R.layout.activity_cusromars_add);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         customerNameE = (EditText)findViewById(R.id.castomrNameET);
         companyNameE = (EditText)findViewById(R.id.companyNameET);
@@ -33,6 +36,10 @@ public class CustomersAddActivity extends AppCompatActivity {
 
         save = (Button)findViewById(R.id.saveBTN);
         databseHelper = new DatabseHelper(this);
+
+        Intent intent = getIntent();
+         u_name = intent.getStringExtra(CustomersActivity.USERNAME);
+        Toast.makeText(this,u_name,Toast.LENGTH_LONG).show();
 
     }
     @Override
@@ -54,16 +61,20 @@ public class CustomersAddActivity extends AppCompatActivity {
        String zipCode = zipCodeE.getText().toString().trim();
 
        CustomerInfo customerInfo =  new CustomerInfo(customerName,companyName,phone,email,addressLine1,addressLine2,city,zipCode);
-       long id = databseHelper.insertCustomerInfo(customerInfo);
+
+           long id = databseHelper.insertCustomerInfo(customerInfo,u_name);
+        //   Toast.makeText(this,Long.toString(id),Toast.LENGTH_LONG).show();
+
        if(id<0){
-           Toast.makeText(this,"UNSUCCESSFUL",Toast.LENGTH_LONG).show();;
+           Toast.makeText(this,"UNSUCCESSFUL",Toast.LENGTH_LONG).show();
        }
        else{
-           Toast.makeText(this,"SUCCESSFUL",Toast.LENGTH_LONG).show();;
+           Toast.makeText(this,"SUCCESSFUL",Toast.LENGTH_LONG).show();
            Intent intent = new Intent(CustomersAddActivity.this,CustomersActivity.class);
+           intent.putExtra(USERNAME,u_name);
            startActivity(intent);
+           finish();
        }
-
 
 
 

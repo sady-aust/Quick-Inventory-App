@@ -16,6 +16,7 @@ public class ProductDetailsAcitivity extends AppCompatActivity {
     DatabseHelper databseHelper;
     TextView pNameTV,pIdTV,quantityTV,priceTV;
     Button deleteBtn;
+    static String USERNAME = "UserName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,15 @@ public class ProductDetailsAcitivity extends AppCompatActivity {
         final String[] productData =  intent.getExtras().getStringArray("productdata");
       // ProductInfo productInfo = databseHelper.getProduct(productData[0],productData[1]);
        // Toast.makeText(this, productInfo.getProductName(), Toast.LENGTH_SHORT).show();
-        showProductInfo(productData[0],productData[1]);
+        showProductInfo(productData[0],productData[1],productData[2]);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int id = databseHelper.deleteAProduct(productData[0],productData[1]);
+                int id = databseHelper.deleteAProduct(productData[0],productData[1],productData[2]);
                 Intent intent1 = new Intent(ProductDetailsAcitivity.this,ProductsActivity.class);
 
+
+                intent1.putExtra(USERNAME,productData[2]);
                 startActivity(intent1);
             }
         });
@@ -52,8 +55,8 @@ public class ProductDetailsAcitivity extends AppCompatActivity {
         return  true;
     }
 
-    public void showProductInfo(String productName,String productId){
-        ProductInfo productInfo = databseHelper.getProduct(productName,productId);
+    public void showProductInfo(String productName,String productId,String userName){
+        ProductInfo productInfo = databseHelper.getProduct(productName,productId,userName);
         Toast.makeText(this, productInfo.getQuatity(), Toast.LENGTH_SHORT).show();
        pNameTV.setText(productInfo.getProductName());
        pIdTV.setText(productInfo.getProductID());

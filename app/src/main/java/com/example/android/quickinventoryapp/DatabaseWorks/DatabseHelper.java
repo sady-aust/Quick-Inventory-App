@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.android.quickinventoryapp.BaseClasses.CustomerInfo;
+import com.example.android.quickinventoryapp.BaseClasses.HistoryInfo;
 import com.example.android.quickinventoryapp.BaseClasses.ProductInfo;
 import com.example.android.quickinventoryapp.BaseClasses.UserInfo;
 
@@ -17,6 +18,9 @@ import java.util.List;
 
 
 public class DatabseHelper extends SQLiteOpenHelper {
+
+
+
     private static final String DATABASE_NAME ="signUpDatabase.db";
     private static final String TABLE_NAME ="signUpTable";
     private static final int DATABSE_VERSION = 1;
@@ -25,6 +29,7 @@ public class DatabseHelper extends SQLiteOpenHelper {
     private static final String PASSWORD = "Password";
     private static final String SHOP_NAME = "ShopName";
     private static final String SHOP_OWNER_NAME = "ShopOwnerName";
+
 
     private static final String CUSTOMER_TABLE = "customarsTable";
     private static final String _ID = "_id";
@@ -36,6 +41,8 @@ public class DatabseHelper extends SQLiteOpenHelper {
     private static final String ADDRESS2 = "Address2";
     private static final String CITY = "City";
     private static final String ZIP ="Zip";
+    private static final String CUSTOMER_TABLE_USER_NAME = "user_name";
+
 
     private static final String PRODUCT_TABLE = "productstable";
     private static final String _ID1 = "_id";
@@ -45,10 +52,16 @@ public class DatabseHelper extends SQLiteOpenHelper {
     private static final String UNIT ="unit";
     private static final String PRICE ="price";
     private static final String ALERT = "alert";
+    private static final String PRODUCT_TABLE_USER_NAME = "user_name";
 
     private static final String HISTORY_TABLE = "historyTable";
     private static final String _ID2 = "id";
-    private static final String HISTORY ="history";
+    private static final String HISTORYTABLE_CUSTOMER_NAME ="name";
+    private static final String HISTORYTABLE_PRODUCT_NAME ="productname";
+    private static final String HISTORYTABLE_QUANTITY ="quantity";
+    private static final String HISTORYTABLE_DATE ="date";
+    private static final String HISTORYTABLE_TOTAL_PRICE="totalPrice";
+    private static final String HISTORY_TABLE_USER_NAME = "user_name";
 
 
 
@@ -57,12 +70,13 @@ public class DatabseHelper extends SQLiteOpenHelper {
             +" TEXT NOT NULL"+");";
     private String CREATE_CUSTOMERS_INFO_TABLE = "CREATE TABLE "+ CUSTOMER_TABLE +" ("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
             +CUSTOMER_NAME+" TEXT NOT NULL, "+COMPANY_NAME+" TEXT NOT NULL, "+PHONE+" TEXT NOT NULL, "+EMAIL+" TEXT NOT NULL, "
-            +ADDRESS1+" TEXT NOT NULL, "+ADDRESS2+" TEXT NOT NULL,"+CITY+" TEXT NOT NULL, "+ZIP+" TEXT NOT NULL"+");";
+            +ADDRESS1+" TEXT NOT NULL, "+ADDRESS2+" TEXT NOT NULL,"+CITY+" TEXT NOT NULL, "+ZIP+" TEXT NOT NULL, "+CUSTOMER_TABLE_USER_NAME+" TEXT NOT NULL"+");";
 
     private String CREATE_PRODUCTS_INFO_TABLE ="CREATE TABLE "+PRODUCT_TABLE+" ("+_ID1+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-            +PRODUCT_ID+" TEXT NOT NULL, "+PRODUCT_NAME+" TEXT NOT NULL, "+QUANTITY+" TEXT NOT NULL, "+UNIT+" TEXT NOT NULL, "+PRICE+" TEXT NOT NULL, "+ALERT+" TEXT NOT NULL"+");";
+            +PRODUCT_ID+" TEXT NOT NULL, "+PRODUCT_NAME+" TEXT NOT NULL, "+QUANTITY+" TEXT NOT NULL, "+UNIT+" TEXT NOT NULL, "+PRICE+" TEXT NOT NULL, "+ALERT+" TEXT NOT NULL, "+PRODUCT_TABLE_USER_NAME+" TEXT NOT NULL"+");";
 
-    private  String CREATE_HISTORY_TABLE = "CREATE TABLE "+HISTORY_TABLE+" ("+_ID2+" INTEGER PRIMARY KEY AUTOINCREMENT, "+HISTORY+" TEXT NOT NULL"+");";
+    private  String CREATE_HISTORY_TABLE = "CREATE TABLE "+HISTORY_TABLE+" ("+_ID2+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + HISTORYTABLE_CUSTOMER_NAME +" TEXT NOT NULL, "+HISTORYTABLE_PRODUCT_NAME+" TEXT NOT NULL, "+HISTORYTABLE_QUANTITY+" TEXT NOT NULL, "+HISTORYTABLE_DATE+" TEXT NOT NULL, "+HISTORYTABLE_TOTAL_PRICE+" TEXT NOT NULL, "+HISTORY_TABLE_USER_NAME+" TEXT NOT NULL"+");";
 
     private String DROP_SIGN_UP_TABLE = "DROP TABLE IF EXISTS "+TABLE_NAME;
     private  String DROP_CUTOMERS_INFO_TABLE ="DROP TABLE IF EXISTS "+ CUSTOMER_TABLE;
@@ -119,15 +133,21 @@ public class DatabseHelper extends SQLiteOpenHelper {
 
     }
 
-    public long insertHistory(String history){
+    public long insertHistory(HistoryInfo historyInfo,String userName){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(HISTORY,history);
+        contentValues.put(HISTORYTABLE_CUSTOMER_NAME,historyInfo.getCustomerName());
+        contentValues.put(HISTORYTABLE_PRODUCT_NAME,historyInfo.getProductName());
+        contentValues.put(HISTORYTABLE_DATE,historyInfo.getDate());
+        contentValues.put(HISTORYTABLE_QUANTITY,historyInfo.getQuantity());
+        contentValues.put(HISTORYTABLE_TOTAL_PRICE,historyInfo.getTotalPrice());
+        contentValues.put(HISTORY_TABLE_USER_NAME,userName);
+
         long id = database.insert(HISTORY_TABLE,null,contentValues);
         return id;
     }
 
-    public long insertCustomerInfo(CustomerInfo customer){
+    public long insertCustomerInfo(CustomerInfo customer,String userName){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -139,34 +159,12 @@ public class DatabseHelper extends SQLiteOpenHelper {
         contentValues.put(ADDRESS2,customer.getGetAddressLine2());
         contentValues.put(CITY,customer.getCity());
         contentValues.put(ZIP,customer.getZipCode());
+        contentValues.put(CUSTOMER_TABLE_USER_NAME,userName);
         long id = database.insert(CUSTOMER_TABLE,null,contentValues);
         return id;
     }
 
-  /*  public String getAllUser(){
-        SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns = {DatabseHelper.UID, DatabseHelper.NAME, DatabseHelper.PASSWORD, DatabseHelper.SHOP_NAME, DatabseHelper.SHOP_OWNER_NAME};
-
-        Cursor cursor = db.query(DatabseHelper.TABLE_NAME,columns,null,null,null,null,null);
-
-        StringBuffer buffer = new StringBuffer();
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String userName = cursor.getString(1);
-            String Password = cursor.getString(2);
-            String ShopName = cursor.getString(3);
-            String ShopOwnerName = cursor.getString(4);
-
-            buffer.append(id+" "+userName+" "+Password+" "+ShopName+" "+ShopOwnerName+"\n");
-
-
-
-        }
-
-        return buffer.toString();
-
-    }*/
 
     public UserInfo receivingDatafromUserInfoTable(String name,String password) {
         //Select UID,NAME,PASSWORD,SHOP_NAME,SHOP_OWNER_NAME From signupTable where Name = name AND PASSWORD = password
@@ -203,12 +201,14 @@ public class DatabseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public List<CustomerInfo> getAllCustomerInfo(){
+    public List<CustomerInfo> getAllCustomerInfo(String userName){
       List<CustomerInfo> list = new ArrayList<>();
         CustomerInfo customerInfo;
         SQLiteDatabase database = this.getReadableDatabase();
-        String[] columns = {_ID,CUSTOMER_NAME,COMPANY_NAME,PHONE,EMAIL,ADDRESS1,ADDRESS2,CITY,ZIP};
-        Cursor cursor = database.query(CUSTOMER_TABLE,columns,null,null,null,null,null);
+        String[] columns = {_ID,CUSTOMER_NAME,COMPANY_NAME,PHONE,EMAIL,ADDRESS1,ADDRESS2,CITY,ZIP,CUSTOMER_TABLE_USER_NAME};
+       // Cursor cursor = database.query(CUSTOMER_TABLE,columns,null,null,null,null,null);
+        String[] selection = {userName};
+        Cursor cursor = database.query(CUSTOMER_TABLE, columns, CUSTOMER_TABLE_USER_NAME + " =?", selection, null, null, null);
 
         while(cursor.moveToNext()){
             int index0 =cursor.getColumnIndex(_ID);
@@ -220,6 +220,7 @@ public class DatabseHelper extends SQLiteOpenHelper {
             int index6 =cursor.getColumnIndex(ADDRESS2);
             int index7 =cursor.getColumnIndex(CITY);
             int index8 = cursor.getColumnIndex(ZIP);
+            int index9 = cursor.getColumnIndex(CUSTOMER_TABLE_USER_NAME);
 
             customerInfo = new CustomerInfo(cursor.getString(index1),cursor.getString(index2),cursor.getString(index3),cursor.getString(index4),cursor.getString(index5),cursor.getString(index6),cursor.getString(index7),cursor.getString(index8));
 
@@ -228,34 +229,43 @@ public class DatabseHelper extends SQLiteOpenHelper {
 
         return list;
     }
-    public List<String> getAllHsitory(){
-        List<String> history = new ArrayList<>();
+    public List<HistoryInfo> getAllHsitory(String userName){
+        List<HistoryInfo> history = new ArrayList<>();
 
         String string = null;
         SQLiteDatabase database = this.getReadableDatabase();
-        String[] columns = {_ID2,HISTORY};
-        Cursor cursor = database.query(HISTORY_TABLE,columns,null,null,null,null,null);
+        String[] columns = {_ID2,HISTORYTABLE_CUSTOMER_NAME,HISTORYTABLE_PRODUCT_NAME,HISTORYTABLE_DATE,HISTORYTABLE_QUANTITY,HISTORYTABLE_TOTAL_PRICE,HISTORY_TABLE_USER_NAME};
+        //Cursor cursor = database.query(HISTORY_TABLE,columns,null,null,null,null,null);
+        String[] selection = {userName};
+        Cursor cursor = database.query(HISTORY_TABLE, columns, HISTORY_TABLE_USER_NAME + " =?", selection, null, null, null);
         while(cursor.moveToNext()){
             int index0 =cursor.getColumnIndex(_ID);
-            int index1 =cursor.getColumnIndex(HISTORY);
+            int index1 =cursor.getColumnIndex(HISTORYTABLE_CUSTOMER_NAME);
+            int index2 = cursor.getColumnIndex(HISTORYTABLE_PRODUCT_NAME);
+            int index3= cursor.getColumnIndex(HISTORYTABLE_DATE);
+            int index4 = cursor.getColumnIndex(HISTORYTABLE_QUANTITY);
+            int index5 = cursor.getColumnIndex(HISTORYTABLE_TOTAL_PRICE);
+            int index6 = cursor.getColumnIndex(HISTORY_TABLE_USER_NAME);
 
 
-            string = cursor.getString(index1);
-           history.add(string);
+           HistoryInfo historyInfo = new HistoryInfo(cursor.getString(index1),cursor.getString(index2),cursor.getString(index3),cursor.getString(index4),cursor.getString(index5));
+           history.add(historyInfo);
         }
         return history;
     }
 
-    public CustomerInfo getCustomer(String customerName,String compnayName){
+    public CustomerInfo getCustomer(String customerName,String compnayName,String userName){
         CustomerInfo customerInfo =null;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns ={_ID,CUSTOMER_NAME,COMPANY_NAME,PHONE,EMAIL,ADDRESS1,ADDRESS2,CITY,ZIP};
-        String[] selection = {customerName,compnayName};
+        String[] columns ={_ID,CUSTOMER_NAME,COMPANY_NAME,PHONE,EMAIL,ADDRESS1,ADDRESS2,CITY,ZIP,CUSTOMER_TABLE_USER_NAME};
+        String[] selection = {customerName,compnayName,userName};
 
         try {
 
-            Cursor cursor = db.query(DatabseHelper.CUSTOMER_TABLE, columns, CUSTOMER_NAME + " =? AND " + COMPANY_NAME + " =?", selection, null, null, null);
+            Cursor cursor = db.query(DatabseHelper.CUSTOMER_TABLE, columns, CUSTOMER_NAME + " =? AND " + COMPANY_NAME + " =? AND "+CUSTOMER_TABLE_USER_NAME +" =?", selection, null, null, null);
+           // String[] selection = {userName};
+           // Cursor cursor = db.query(DatabseHelper.CUSTOMER_TABLE, columns, CUSTOMER_TABLE_USER_NAME + " =?", selection, null, null, null);
 
             while(cursor.moveToNext()){
                 int index0 =cursor.getColumnIndex(_ID);
@@ -267,6 +277,7 @@ public class DatabseHelper extends SQLiteOpenHelper {
                 int index6 =cursor.getColumnIndex(ADDRESS2);
                 int index7 =cursor.getColumnIndex(CITY);
                 int index8 = cursor.getColumnIndex(ZIP);
+                int index9 = cursor.getColumnIndex(CUSTOMER_TABLE_USER_NAME);
 
                 customerInfo = new CustomerInfo(cursor.getString(index1),cursor.getString(index2),cursor.getString(index3),cursor.getString(index4),cursor.getString(index5),cursor.getString(index6),cursor.getString(index7),cursor.getString(index8));
             }
@@ -277,15 +288,15 @@ public class DatabseHelper extends SQLiteOpenHelper {
         return customerInfo;
     }
 
-    public int deleteACustomer(String name,String company){
+    public int deleteACustomer(String name,String company,String userName){
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] whereClause = {name,company};
-        int id= db.delete(CUSTOMER_TABLE,CUSTOMER_NAME+ " =? and "+COMPANY_NAME+" =?",whereClause);
+        String[] whereClause = {name,company,userName};
+        int id= db.delete(CUSTOMER_TABLE,CUSTOMER_NAME+ " =? and "+COMPANY_NAME+" =? and "+CUSTOMER_TABLE_USER_NAME+" =?",whereClause);
         return id;
 
     }
 
-    public long insertProduct(ProductInfo productInfo){
+    public long insertProduct(ProductInfo productInfo,String userName){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PRODUCT_NAME,productInfo.getProductName());
@@ -294,16 +305,19 @@ public class DatabseHelper extends SQLiteOpenHelper {
         contentValues.put(UNIT,productInfo.getUnit());
         contentValues.put(PRICE,productInfo.getPrice());
         contentValues.put(ALERT,productInfo.getAlertMeWhen());
+        contentValues.put(PRODUCT_TABLE_USER_NAME,userName);
         long id = db.insert(PRODUCT_TABLE,null,contentValues);
         return id;
     }
 
-    public List<ProductInfo> getAllProductInfo(){
+    public List<ProductInfo> getAllProductInfo(String userName){
         List<ProductInfo> products = new ArrayList<>();
         ProductInfo productInfo;
         SQLiteDatabase database = this.getReadableDatabase();
-        String[] columns = {_ID1,PRODUCT_NAME,PRODUCT_ID,QUANTITY,UNIT,PRICE,ALERT};
-        Cursor cursor = database.query(PRODUCT_TABLE,columns,null,null,null,null,null);
+        String[] columns = {_ID1,PRODUCT_NAME,PRODUCT_ID,QUANTITY,UNIT,PRICE,ALERT,PRODUCT_TABLE_USER_NAME};
+       // Cursor cursor = database.query(PRODUCT_TABLE,columns,null,null,null,null,null);
+        String[] selection = {userName};
+        Cursor cursor = database.query(PRODUCT_TABLE, columns, PRODUCT_TABLE_USER_NAME + " =?", selection, null, null, null);
 
         while(cursor.moveToNext()){
             int index0 =cursor.getColumnIndex(_ID1);
@@ -313,6 +327,7 @@ public class DatabseHelper extends SQLiteOpenHelper {
             int index4 =cursor.getColumnIndex(UNIT);
             int index5 =cursor.getColumnIndex(PRICE);
             int index6 =cursor.getColumnIndex(ALERT);
+            int index7 = cursor.getColumnIndex(PRODUCT_TABLE_USER_NAME);
 
 
             productInfo = new ProductInfo(cursor.getString(index1),cursor.getString(index2),cursor.getString(index3),cursor.getString(index4),cursor.getString(index5),cursor.getString(index6));
@@ -323,24 +338,24 @@ public class DatabseHelper extends SQLiteOpenHelper {
         return products;
     }
 
-    public int deleteAProduct(String name,String productid){
+    public int deleteAProduct(String name,String productid,String userName){
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] whereClause = {name,productid};
-        int id= db.delete(PRODUCT_TABLE,PRODUCT_NAME+ " =? and "+PRODUCT_ID+" =?",whereClause);
+        String[] whereClause = {name,productid,userName};
+        int id= db.delete(PRODUCT_TABLE,PRODUCT_NAME+ " =? and "+PRODUCT_ID+" =? and "+PRODUCT_TABLE_USER_NAME+" =?",whereClause);
         return id;
 
     }
 
-    public ProductInfo getProduct(String productName,String productId){
+    public ProductInfo getProduct(String productName,String productId,String userName){
         ProductInfo productInfo =null;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns ={_ID1,PRODUCT_NAME,PRODUCT_ID,QUANTITY,UNIT,PRICE,ALERT};
-        String[] selection = {productName,productId};
+        String[] columns ={_ID1,PRODUCT_NAME,PRODUCT_ID,QUANTITY,UNIT,PRICE,ALERT,PRODUCT_TABLE_USER_NAME};
+        String[] selection = {productName,productId,userName};
 
         try {
 
-            Cursor cursor = db.query(PRODUCT_TABLE, columns, PRODUCT_NAME + " =? AND " + PRODUCT_ID + " =?", selection, null, null, null);
+            Cursor cursor = db.query(PRODUCT_TABLE, columns, PRODUCT_NAME + " =? AND " + PRODUCT_ID + " =? AND "+PRODUCT_TABLE_USER_NAME+" =?", selection, null, null, null);
 
             while(cursor.moveToNext()){
                 int index0 =cursor.getColumnIndex(_ID1);
@@ -350,6 +365,7 @@ public class DatabseHelper extends SQLiteOpenHelper {
                 int index4 =cursor.getColumnIndex(UNIT);
                 int index5 =cursor.getColumnIndex(PRICE);
                 int index6 =cursor.getColumnIndex(ALERT);
+                int index7 = cursor.getColumnIndex(PRODUCT_TABLE_USER_NAME);
 
 
                 productInfo = new ProductInfo(cursor.getString(index1),cursor.getString(index2),cursor.getString(index3),cursor.getString(index4),cursor.getString(index5),cursor.getString(index6));
@@ -361,15 +377,16 @@ public class DatabseHelper extends SQLiteOpenHelper {
         return productInfo;
     }
 
-    public void updateProductQuantity(String name,String newValue,String prevValue){
+    public void updateProductQuantity(String name,String newValue,String prevValue,String userName){
         int value = Integer.parseInt(prevValue)-Integer.parseInt(newValue);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(QUANTITY,value);
-        String[] whereArgs = {name};
-        db.update(PRODUCT_TABLE,contentValues,PRODUCT_NAME+" =? ",whereArgs);
+        String[] whereArgs = {name,userName};
+        db.update(PRODUCT_TABLE,contentValues,PRODUCT_NAME+" =? AND "+PRODUCT_TABLE_USER_NAME+" =?",whereArgs);
 
     }
+
 
 
 

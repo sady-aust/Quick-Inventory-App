@@ -14,6 +14,8 @@ import com.example.android.quickinventoryapp.R;
 public class ProductsAddActitivty extends AppCompatActivity {
     EditText productNameET,productIdET,quantityET,priceET,alertET,unitET;
     DatabseHelper databseHelper;
+    String u_name ="";
+    static String USERNAME = "UserName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,16 @@ public class ProductsAddActitivty extends AppCompatActivity {
         alertET =(EditText)findViewById(R.id.alertET);
         databseHelper = new DatabseHelper(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Intent intent = getIntent();
+         u_name = null;
+        try {
+            u_name =  intent.getStringExtra(ProductsActivity.USERNAME).toString();
+            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+        }
+        catch(Exception e){
+            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -46,14 +58,19 @@ public class ProductsAddActitivty extends AppCompatActivity {
         String alert = alertET.getText().toString().trim();
 
         ProductInfo productInfo = new ProductInfo(productName,productId,quantity,unit,price,alert);
-       long id= databseHelper.insertProduct(productInfo);
+       long id= databseHelper.insertProduct(productInfo,u_name);
         if(id<0){
-            Toast.makeText(this,"UNSUCCESSFUL",Toast.LENGTH_LONG).show();;
+            Toast.makeText(this,"UNSUCCESSFUL",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"SUCCESSFUL",Toast.LENGTH_LONG).show();;
+            Toast.makeText(this,"SUCCESSFUL",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ProductsAddActitivty.this,ProductsActivity.class);
+
+
+            intent.putExtra(USERNAME,u_name);
             startActivity(intent);
+            startActivity(intent);
+            finish();
         }
 
 

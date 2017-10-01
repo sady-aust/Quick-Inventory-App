@@ -4,8 +4,6 @@ package com.example.android.quickinventoryapp.ActivityClasses;
    Author
     Md. Toufiqul Islam
     Rahat Mushfiq Abir
-    ID : 15-02-04-97 And
-         15-02-04-96
     Ahsanullah University Of Science & Technology
 
  */
@@ -29,14 +27,18 @@ public class SignInActivity extends AppCompatActivity {
     EditText userNameEditText, passwordEditText;
     DatabseHelper databseHelper;
 
+
     int personID;
-    String userName,userpassword,shopName,shopOwnerName;
+   String userName,userpassword,shopName,shopOwnerName;
+    static String USER_NAME ="UserName";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         dontHaveAccountTV = (TextView) findViewById(R.id.donthvTV);
         signInBtn = (Button) findViewById(R.id.signInBtn);
         userNameEditText = (EditText) findViewById(R.id.userNameET);
@@ -48,7 +50,9 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignInActivity.this, SignUpAcitivity.class);
+
                 startActivity(intent);
+
             }
         });
 
@@ -65,8 +69,12 @@ public class SignInActivity extends AppCompatActivity {
 
         if(isUsernameAndPasswordMatched(givenUserName,givenPassword)){
            Intent intent = new Intent(SignInActivity.this,DashBoardActivity.class);
+            intent.putExtra(USER_NAME,userName);
+
+
 
             startActivity(intent);
+            finish();
         }
         else{
             Toast.makeText(this, "UserName and Password Doesn't Match", Toast.LENGTH_LONG).show();

@@ -16,6 +16,7 @@ public class CustomersDetailsActivity extends AppCompatActivity {
     private DatabseHelper databseHelper;
     private String name ="",customercompanyName ="";
     private Button deleteButton;
+    static String USERNAME = "UserName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +32,17 @@ public class CustomersDetailsActivity extends AppCompatActivity {
         city =(TextView)findViewById(R.id.cityTVdetails);
         zipCode =(TextView)findViewById(R.id.zipCodeTVdetails);
         deleteButton = (Button)findViewById(R.id.deleteCustomerbtn);
-        Intent intent = getIntent();
+
+        final Intent intent = getIntent();
         final String[] customerData =  intent.getExtras().getStringArray("data");
         databseHelper = new DatabseHelper(this);
-        showcustomerInfo(customerData[0],customerData[1]);
+        showcustomerInfo(customerData[0],customerData[1],customerData[2]);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               int id = databseHelper.deleteACustomer(customerData[0],customerData[1]);
+               int id = databseHelper.deleteACustomer(customerData[0],customerData[1],customerData[2]);
                 Intent intent1 = new Intent(CustomersDetailsActivity.this,CustomersActivity.class);
+                intent1.putExtra(USERNAME,customerData[2]);
 
                 startActivity(intent1);
 
@@ -54,8 +57,8 @@ public class CustomersDetailsActivity extends AppCompatActivity {
         return  true;
     }
 
-    public void showcustomerInfo(String cutomer,String company){
-       CustomerInfo customerInfo = databseHelper.getCustomer(cutomer,company);
+    public void showcustomerInfo(String cutomer,String company,String userName){
+       CustomerInfo customerInfo = databseHelper.getCustomer(cutomer,company,userName);
         customerName.setText(customerInfo.getCutomerName());
         companyName.setText(customerInfo.getCompanyName());
         phone.setText(customerInfo.getPhone());

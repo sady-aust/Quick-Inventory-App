@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.android.quickinventoryapp.BaseClasses.CustomerInfo;
-import com.example.android.quickinventoryapp.Custom.MyAdapter;
+import com.example.android.quickinventoryapp.Custom.CustomerAdapter;
 import com.example.android.quickinventoryapp.DatabaseWorks.DatabseHelper;
 import com.example.android.quickinventoryapp.R;
 
@@ -19,15 +19,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomersActivity extends AppCompatActivity {
-      ListView customersList;
+    ListView customersList;
     DatabseHelper databseHelper;
     FloatingActionButton fab;
     Intent intent;
     String btnName;
+
+    static String USERNAME = "UserName";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        Intent intent = getIntent();
+        String u_name = null;
+        try {
+            u_name =  intent.getStringExtra(DashBoardActivity.USERNAME).toString();
+            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+        }
+        catch(Exception e){
+            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -38,20 +50,29 @@ public class CustomersActivity extends AppCompatActivity {
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(R.drawable.plus);
 
+        final String finalU_name = u_name;
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CustomersActivity.this,CustomersAddActivity.class);
+                intent.putExtra(USERNAME,finalU_name);
                 startActivity(intent);
+                finish();
             }
         });
 
-        databseHelper = new DatabseHelper(this);
-        final List<CustomerInfo> customerInfo =  databseHelper.getAllCustomerInfo();
 
-        MyAdapter adapter = new MyAdapter(this,getcustomersName(customerInfo),getCompanyName(customerInfo));
+
+        databseHelper = new DatabseHelper(this);
+        try {
+            final List<CustomerInfo> customerInfo = databseHelper.getAllCustomerInfo(u_name);
+
+
+        CustomerAdapter adapter = new CustomerAdapter(this,getcustomersName(customerInfo),getCompanyName(customerInfo));
         customersList.setAdapter(adapter);
+
 
         customersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,11 +80,14 @@ public class CustomersActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(CustomersActivity.this,CustomersDetailsActivity.class);
                 CustomerInfo info = customerInfo.get(position);
-                String[] data = {info.getCutomerName(),info.getCompanyName()};
+                String[] data = {info.getCutomerName(),info.getCompanyName(), finalU_name};
                 intent.putExtra("data",data);
                 startActivity(intent);
             }
-        });
+        });}catch (Exception e){
+            Toast.makeText(this,e.toString(),Toast.LENGTH_LONG).show();
+        }
+
 
     }
     @Override

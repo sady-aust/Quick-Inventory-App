@@ -14,11 +14,11 @@ import java.util.List;
 
 
 
-public class MyAdapter extends ArrayAdapter<String> {
+public class CustomerAdapter extends ArrayAdapter<String> {
     List<String> nameList;
     List<String> companyList;
     Context context;
-    public MyAdapter( Context context,List<String> names,List<String> companyNames) {
+    public CustomerAdapter(Context context, List<String> names, List<String> companyNames) {
         super(context, R.layout.single_list_item,R.id.customersTV,names);
 
         this.nameList = names;

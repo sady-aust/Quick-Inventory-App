@@ -32,7 +32,10 @@
         <activity android:name=".ActivityClasses.ProductsAddActitivty" />
         <activity android:name=".ActivityClasses.ProductDetailsAcitivity" />
         <activity android:name=".ActivityClasses.SalesOrderActivity" />
-        <activity android:name=".ActivityClasses.HistoryActivity"></activity>
+        <activity android:name=".ActivityClasses.HistoryActivity" />
+        <activity android:name=".ActivityClasses.HistoryDetailsActivity" />
+        <activity android:name=".ActivityClasses.AnalysisActivity" />
+        <activity android:name=".ActivityClasses.ChartActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.quickinventoryapp.ActivityClasses.HistoryDetailsActivity"
+    android:background="@drawable/background1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/edittextshape"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/sellidTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:textColor="#FFFF"
+            android:textSize="20dp"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:id="@+id/customerNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Name  :"
+                android:textColor="#FFF"/>
+            <TextView
+                android:id="@+id/customerNameDetailsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FFF"
+                android:layout_toRightOf="@id/customerNameTV"/>
+
+
+            <TextView
+                android:id="@+id/productNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Name  :"
+                android:textColor="#FFF"
+                android:layout_below="@id/customerNameTV"/>
+            <TextView
+                android:id="@+id/productNameDetailsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FFF"
+                android:layout_below="@id/customerNameDetailsTV"
+                android:layout_toRightOf="@id/productNameTV"/>
+
+            <TextView
+                android:id="@+id/ItemTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity             :"
+                android:textColor="#FFF"
+                android:layout_below="@id/productNameTV"/>
+            <TextView
+                android:id="@+id/quantityDetailsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FFF"
+                android:layout_below="@id/productNameDetailsTV"
+                android:layout_toRightOf="@id/productNameTV"/>
+
+            <TextView
+                android:id="@+id/totalPriceTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total                   :"
+                android:textColor="#FFF"
+                android:layout_below="@id/ItemTv"/>
+            <TextView
+                android:id="@+id/totalPriceDetailsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FFF"
+                android:layout_below="@id/quantityDetailsTV"
+                android:layout_toRightOf="@id/totalPriceTV"/>
+            <TextView
+                android:id="@+id/dateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date                    :"
+                android:textColor="#FFF"
+                android:layout_below="@id/totalPriceTV"/>
+            <TextView
+                android:id="@+id/dateDetailsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FFF"
+                android:layout_below="@id/totalPriceDetailsTV"
+                android:layout_toRightOf="@id/dateTV"/>
+
+
+
+
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+

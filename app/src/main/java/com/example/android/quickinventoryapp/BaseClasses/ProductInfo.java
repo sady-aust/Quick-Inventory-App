@@ -19,6 +19,8 @@ public class ProductInfo {
         this.alertMeWhen = alertMeWhen;
     }
 
+
+
     public String getProductName() {
         return productName;
     }
