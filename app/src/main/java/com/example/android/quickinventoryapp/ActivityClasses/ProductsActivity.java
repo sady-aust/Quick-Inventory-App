@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.android.quickinventoryapp.BaseClasses.ProductInfo;
 import com.example.android.quickinventoryapp.Custom.CustomerAdapter;
@@ -37,10 +36,10 @@ public class ProductsActivity extends AppCompatActivity {
         String u_name = null;
         try {
             u_name =  intent.getStringExtra(DashBoardActivity.USERNAME).toString();
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
 
 

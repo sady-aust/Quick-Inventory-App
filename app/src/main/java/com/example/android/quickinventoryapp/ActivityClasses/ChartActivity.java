@@ -36,6 +36,9 @@ public class ChartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         chart =(PieChart)findViewById(R.id.pieChart);
 
@@ -45,10 +48,10 @@ public class ChartActivity extends AppCompatActivity {
         String u_name = null;
         try {
             u_name =  intent.getStringExtra(AnalysisActivity.USERNAME).toString();
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
 
         List<HistoryInfo> allHistoryInfoList = databseHelper.getAllHsitory(u_name);
@@ -73,6 +76,14 @@ public class ChartActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onSupportNavigateUp();
+        finish();
+        return  true;
+    }
+
+
     public void showChart(List<Float> parsantageOfEachProductSell, Set<String> products) {
         List<PieEntry> pieEntries = new ArrayList<>();
 
@@ -85,7 +96,7 @@ public class ChartActivity extends AppCompatActivity {
             count++;
         }
 
-        PieDataSet dataset = new PieDataSet(pieEntries,"A CHART");
+        PieDataSet dataset = new PieDataSet(pieEntries,"Pie Chart of Your Shop Products");
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
 
         PieData data = new PieData(dataset);

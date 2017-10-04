@@ -18,6 +18,7 @@ public class HistoryDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_details);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         sellId =(TextView)findViewById(R.id.sellidTV);
         customerName = (TextView)findViewById(R.id.customernamedetailsTV);
         productName = (TextView)findViewById(R.id.productIDDetailsTV);

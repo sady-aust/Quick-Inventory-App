@@ -1,8 +1,14 @@
 package com.example.android.quickinventoryapp.ActivityClasses;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.android.quickinventoryapp.BaseClasses.CustomerInfo;
 import com.example.android.quickinventoryapp.BaseClasses.HistoryInfo;
+import com.example.android.quickinventoryapp.BaseClasses.NotificationMessage;
 import com.example.android.quickinventoryapp.BaseClasses.ProductInfo;
 import com.example.android.quickinventoryapp.DatabaseWorks.DatabseHelper;
 import com.example.android.quickinventoryapp.R;
@@ -36,6 +43,9 @@ public class SalesOrderActivity extends AppCompatActivity {
 
     static String USERNAME = "UserName";
 
+    NotificationCompat.Builder notification;
+    private static final int unique_Id = 45612;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +62,14 @@ public class SalesOrderActivity extends AppCompatActivity {
         String u_name = null;
         try {
             u_name =  intent.getStringExtra(DashBoardActivity.USERNAME).toString();
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
+
+        notification = new NotificationCompat.Builder(this);
+        notification.setAutoCancel(true);
 
 
 
@@ -97,7 +110,7 @@ public class SalesOrderActivity extends AppCompatActivity {
                 if(quantityET.getText().toString()!=null){
                 float t = getProductPrice(allProductInfo, seletedItem.trim());
 
-                Toast.makeText(SalesOrderActivity.this, Float.toString( getProductPrice(allProductInfo, seletedItem.trim())), Toast.LENGTH_LONG).show();
+               // Toast.makeText(SalesOrderActivity.this, Float.toString( getProductPrice(allProductInfo, seletedItem.trim())), Toast.LENGTH_LONG).show();
                      totalPrice = Float.toString(t* parseInt(quantityET.getText().toString()));
                     productPriceET.setText(totalPrice);
                 }
@@ -122,7 +135,10 @@ public class SalesOrderActivity extends AppCompatActivity {
 
                     if (allProductInfo.get(i).getProductName().equals(productName)) {
                         if (parseInt(userQuantity) <= parseInt(allProductInfo.get(i).getQuatity())) {
-                            databaseHelper.updateProductQuantity(productName, userQuantity, allProductInfo.get(i).getQuatity(), finalU_name);
+                           int availableQuantity = databaseHelper.updateProductQuantity(productName, userQuantity, allProductInfo.get(i).getQuatity(), finalU_name);
+                            if(availableQuantity<Integer.parseInt(allProductInfo.get(i).getAlertMeWhen())){
+                                getQuanityNotification(allProductInfo.get(i).getProductName(),availableQuantity,finalU_name);
+                            }
                             long id = databaseHelper.insertHistory(new HistoryInfo(customerName, productName, date.toString(), userQuantity,totalPrice),finalU_name);
 
                             if (id < 0) {
@@ -174,6 +190,42 @@ public class SalesOrderActivity extends AppCompatActivity {
             }
         }
         return 0;
+    }
+
+    private void getQuanityNotification(String productName,int quantity,String uName) {
+        //Biuilding the notification
+        notification.setSmallIcon(R.mipmap.ic_launcher);
+        notification.setTicker(productName+"'s Quantity is in shortage");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("Alart!");
+        String message = "Currently "+productName+"'s Quanity is "+quantity+". Please add more "+productName+" in your Stock.";
+        notification.setContentText(message);
+
+        databaseHelper.insertNotificationMessage(new NotificationMessage(message),uName);
+
+
+        try {
+            Intent intent = new Intent(this, NotificationActivity.class);
+            intent.putExtra(USERNAME, uName);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            notification.setContentIntent(pendingIntent);
+        }catch (Exception e){
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+        notification.setLights(Color.BLUE, 500, 500);
+        notification.setStyle(new NotificationCompat.InboxStyle());
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        notification.setSound(sound);
+
+        long[] pattern = {500,500,500,500,500,500,500,500,500};
+        notification.setVibrate(pattern);
+
+
+
+        //Build The Notification and issue It
+
+        NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(unique_Id,notification.build());
     }
 
 

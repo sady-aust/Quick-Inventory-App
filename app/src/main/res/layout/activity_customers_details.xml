@@ -26,7 +26,7 @@
                 android:id="@+id/customerNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Customer Name :"
+                android:text="Customer Name "
                 android:textColor="#FFF"
                 android:textSize="15dp" />
 
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/customerNameTV"
                 android:layout_marginTop="10dp"
-                android:text="Company Name :"
+                android:text="Company Name "
                 android:textColor="#FFF"
                 android:textSize="15dp" />
 
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/companyNameTV"
                 android:layout_marginTop="10dp"
-                android:text="Phone                  :"
+                android:text="Phone                  "
                 android:textColor="#FFF"
                 android:textSize="15dp" />
 
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/customerPhoneTV"
                 android:layout_marginTop="10dp"
-                android:text="Email                    :"
+                android:text="Email                    "
                 android:textColor="#FFF"
                 android:textSize="15dp" />
 
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/customerEmailTV"
                 android:layout_marginTop="10dp"
-                android:text="AddressLine1     :"
+                android:text="AddressLine1     "
                 android:textColor="#FFF"
                 android:textSize="15dp" />
 
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/customerAddressLine1TV"
                 android:layout_marginTop="10dp"
-                android:text="AddressLine2     :"
+                android:text="AddressLine2     "
                 android:textColor="#FFF"
                 android:textSize="15dp" />
 
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/customerAddressLine2TV"
                 android:layout_marginTop="10dp"
-                android:text="City                       :"
+                android:text="City                       "
                 android:textColor="#FFF"
                 android:textSize="15dp" />
 
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/customerCityTV"
                 android:layout_marginTop="10dp"
-                android:text="ZIP Code             :"
+                android:text="ZIP Code             "
                 android:textColor="#FFF"
                 android:textSize="15dp" />
 
@@ -200,6 +200,7 @@
                     android:background="@drawable/buttonshape"
                     android:text=" Delete Customer "
                     android:textColor="#FFF"
+                    android:layout_margin="5dp"
 
 
                     />

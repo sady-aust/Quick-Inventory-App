@@ -25,6 +25,7 @@ public class SignUpAcitivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_acitivity);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         userNameET = (EditText) findViewById(R.id.signUpUserNameET);
         passWordET = (EditText)findViewById(R.id.signUpPasswordET);
@@ -41,7 +42,7 @@ public class SignUpAcitivity extends AppCompatActivity {
         String shopName = shopNameET.getText().toString().trim();
         String shopOwnerName = shopOwnerNameET.getText().toString().trim();
 
-        UserInfo userInfo = new UserInfo(userName,passWord,shopName,shopOwnerName);
+        final UserInfo userInfo = new UserInfo(userName,passWord,shopName,shopOwnerName);
      long id =   databseHelper.insertUserinfo(userInfo);
         if(id<0){
             Toast.makeText(this,"UNSUCCESSFUL",Toast.LENGTH_LONG).show();
@@ -50,14 +51,16 @@ public class SignUpAcitivity extends AppCompatActivity {
           //  Toast.makeText(this,"SUCCESSFUL",Toast.LENGTH_LONG).show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Message");
-            builder.setMessage("Thank You for Sign Up.Do you want to sign in now?");
+            builder.setMessage("Thank You for Sign Up.Do you want to Sign in now?");
 
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(SignUpAcitivity.this,DashBoardActivity.class);
-                    intent.putExtra(USERNAME,userName);
+                    String[] data = { userInfo.getUserName(),userInfo.getShopOwneName()};
+                    intent.putExtra(USERNAME,data);
                     startActivity(intent);
+                    finish();
                 }
             });
             builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {

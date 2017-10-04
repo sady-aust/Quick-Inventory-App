@@ -34,3 +34,12 @@ dependencies {
 dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 }
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}

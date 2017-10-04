@@ -35,16 +35,18 @@ public class CustomersActivity extends AppCompatActivity {
         String u_name = null;
         try {
             u_name =  intent.getStringExtra(DashBoardActivity.USERNAME).toString();
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+       // getSupportActionBar().setTitle("Customers");
 
 
-        Toast.makeText(this, btnName, Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(this, btnName, Toast.LENGTH_SHORT).show();
         customersList = (ListView) findViewById(R.id.cutomersLV);
 
         ImageView imageView = new ImageView(this);

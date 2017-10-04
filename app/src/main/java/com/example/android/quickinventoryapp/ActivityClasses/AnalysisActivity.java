@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.android.quickinventoryapp.Custom.AnalysisCategoryAdapter;
 import com.example.android.quickinventoryapp.R;
@@ -23,22 +22,25 @@ public class AnalysisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Intent intent = getIntent();
         String u_name = null;
         try {
             u_name =  intent.getStringExtra(DashBoardActivity.USERNAME).toString();
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
-            Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, u_name, Toast.LENGTH_SHORT).show();
         }
 
 
         ananlysicCategoryLV = (ListView)findViewById(R.id.analysisCategoryLV);
 
         final List<String> categories = new ArrayList<>();
-        categories.add("Analysis of your products Based on last 30 days");
+        categories.add("Analysis of your Shop products Based on last 30 days");
         AnalysisCategoryAdapter adapter = new AnalysisCategoryAdapter(this,categories);
         ananlysicCategoryLV.setAdapter(adapter);
 
@@ -57,4 +59,14 @@ public class AnalysisActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onSupportNavigateUp();
+        finish();
+        return  true;
+    }
+
+
+
 }

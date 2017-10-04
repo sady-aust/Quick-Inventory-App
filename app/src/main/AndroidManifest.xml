@@ -8,9 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ActivityClasses.SignInActivity"
-            android:label="Quick Inventory App">
+        <activity android:name=".ActivityClasses.SpleshScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,20 +20,39 @@
             android:label="Sign Up" />
         <activity
             android:name=".ActivityClasses.DashBoardActivity"
-            android:label="DashBoard" />
-        <activity android:name=".ActivityClasses.ProductsActivity" />
+            android:label="Dashboard" />
+        <activity android:name=".ActivityClasses.ProductsActivity"
+            android:label="Products"/>
         <activity
             android:name=".ActivityClasses.CustomersActivity"
-            android:theme="@style/CustomersActivityTheme" />
-        <activity android:name=".ActivityClasses.CustomersAddActivity" />
-        <activity android:name=".ActivityClasses.CustomersDetailsActivity" />
-        <activity android:name=".ActivityClasses.ProductsAddActitivty" />
-        <activity android:name=".ActivityClasses.ProductDetailsAcitivity" />
-        <activity android:name=".ActivityClasses.SalesOrderActivity" />
-        <activity android:name=".ActivityClasses.HistoryActivity" />
+            android:theme="@style/CustomersActivityTheme"
+            android:label="Customers"/>
+        <activity android:name=".ActivityClasses.SignInActivity" />
+
+        <activity android:name=".ActivityClasses.CustomersAddActivity"
+            android:label="Add Customer"/>
+
+        <activity android:name=".ActivityClasses.CustomersDetailsActivity"
+            android:label="Customer Details"/>
+        <activity android:name=".ActivityClasses.ProductsAddActitivty"
+            android:label="Add Product"/>
+
+        <activity android:name=".ActivityClasses.ProductDetailsAcitivity"
+            android:label="Product Details"/>
+        <activity android:name=".ActivityClasses.SalesOrderActivity"
+            android:label="Sale Order"/>
+        <activity android:name=".ActivityClasses.HistoryActivity"
+            android:label="Histories"/>
         <activity android:name=".ActivityClasses.HistoryDetailsActivity" />
-        <activity android:name=".ActivityClasses.AnalysisActivity" />
-        <activity android:name=".ActivityClasses.ChartActivity"></activity>
+        <activity android:name=".ActivityClasses.AnalysisActivity"
+            android:label="Analysis"/>
+        <activity android:name=".ActivityClasses.ChartActivity"
+            android:label="Product Analysis"/>
+
+        <activity android:name=".ActivityClasses.AboutUsActivity"
+            android:label="About Us"/>
+        <activity android:name=".ActivityClasses.NotificationActivity"
+            android:label="Notifications"></activity>
     </application>
 
 </manifest>

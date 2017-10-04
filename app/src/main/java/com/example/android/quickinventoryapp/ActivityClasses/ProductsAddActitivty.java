@@ -21,6 +21,7 @@ public class ProductsAddActitivty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_add_actitivty);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         productNameET = (EditText)findViewById(R.id.productNameET);
         productIdET =(EditText)findViewById(R.id.productIdET);
         quantityET =(EditText)findViewById(R.id.quantityET);
@@ -63,12 +64,11 @@ public class ProductsAddActitivty extends AppCompatActivity {
             Toast.makeText(this,"UNSUCCESSFUL",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"SUCCESSFUL",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Added",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ProductsAddActitivty.this,ProductsActivity.class);
 
 
             intent.putExtra(USERNAME,u_name);
-            startActivity(intent);
             startActivity(intent);
             finish();
         }

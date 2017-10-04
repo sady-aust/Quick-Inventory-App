@@ -39,7 +39,7 @@ public class CustomersAddActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
          u_name = intent.getStringExtra(CustomersActivity.USERNAME);
-        Toast.makeText(this,u_name,Toast.LENGTH_LONG).show();
+       // Toast.makeText(this,u_name,Toast.LENGTH_LONG).show();
 
     }
     @Override
@@ -69,7 +69,7 @@ public class CustomersAddActivity extends AppCompatActivity {
            Toast.makeText(this,"UNSUCCESSFUL",Toast.LENGTH_LONG).show();
        }
        else{
-           Toast.makeText(this,"SUCCESSFUL",Toast.LENGTH_LONG).show();
+           Toast.makeText(this,"Saved",Toast.LENGTH_LONG).show();
            Intent intent = new Intent(CustomersAddActivity.this,CustomersActivity.class);
            intent.putExtra(USERNAME,u_name);
            startActivity(intent);

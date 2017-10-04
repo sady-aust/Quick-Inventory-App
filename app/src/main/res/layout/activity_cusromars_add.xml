@@ -7,27 +7,28 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#060606">
+        android:background="#000">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/LogoTV"
-                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextshape"
+            android:layout_margin="10dp">
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Here a logo will be Set"
-                android:textSize="25dp"
-                android:gravity="center"
-                android:textColor="#dfd8d8"/>
+                android:layout_margin="10dp">
+
 
             <EditText
                 android:id="@+id/castomrNameET"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/LogoTV"
-                android:background="@drawable/customers_add_activitybackground"
+                android:background="@drawable/edittextshape"
                 android:hint="Customer Name"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:textColorHint="#fffefe"
                 android:layout_margin="5dp"/>
 
             <EditText
@@ -35,9 +36,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/castomrNameET"
-                android:background="@drawable/customers_add_activitybackground"
+                android:background="@drawable/edittextshape"
+                android:textColorHint="#fffefe"
+                android:textColor="#fff"
                 android:hint="Company Name"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/contactsTV"
@@ -66,10 +70,12 @@
                 android:layout_height="50dp"
                 android:layout_below="@id/contactsTV"
                 android:layout_marginLeft="5dp"
+                android:textColor="#fff"
                 android:layout_toRightOf="@id/phoneTV"
-                android:background="@drawable/customers_add_activitybackground"
+                android:background="@drawable/edittextshape"
                 android:inputType="number"
                 android:layout_margin="5dp"
+
 
                 />
 
@@ -90,9 +96,9 @@
                 android:layout_height="50dp"
                 android:layout_below="@id/phoneTV"
                 android:layout_marginLeft="12dp"
-
+                android:textColor="#fff"
                 android:layout_toRightOf="@id/emailTV"
-                android:background="@drawable/customers_add_activitybackground"
+                android:background="@drawable/edittextshape"
 
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="5dp"
@@ -116,18 +122,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/addressTV"
-                android:background="@drawable/customers_add_activitybackground"
+                android:textColor="#fff"
+                android:background="@drawable/edittextshape"
                 android:hint="AddressLine 1"
+                android:textColorHint="#ffff"
+                android:gravity="center"
                 android:layout_margin="5dp"/>
 
             <EditText
                 android:id="@+id/addressLineTwoET"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/addressLineOneET"
-                android:background="@drawable/customers_add_activitybackground"
+                android:background="@drawable/edittextshape"
                 android:hint="AddressLine 2"
-                android:layout_margin="5dp"/>
+                android:textColorHint="#ffff"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:layout_marginRight="5dp"
+                android:layout_below="@+id/addressLineOneET"
+                android:layout_alignStart="@+id/addressLineOneET" />
 
             <LinearLayout
                 android:id="@+id/cityAndZipCodeLL"
@@ -143,7 +156,10 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1.5"
-                    android:background="@drawable/customers_add_activitybackground"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:background="@drawable/edittextshape"
                     android:hint="City" />
 
                 <EditText
@@ -152,7 +168,10 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="2dp"
                     android:layout_weight="1.5"
-                    android:background="@drawable/customers_add_activitybackground"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:background="@drawable/edittextshape"
                     android:hint="Zip Code" />
 
             </LinearLayout>
@@ -174,6 +193,7 @@
                     android:onClick="saveCustomerInfo"
                     android:textColor="#ede8e8"
                     android:textSize="25dp" />
+            </RelativeLayout>
             </RelativeLayout>
 
 

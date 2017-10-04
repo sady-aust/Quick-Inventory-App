@@ -11,6 +11,7 @@ package com.example.android.quickinventoryapp.ActivityClasses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,9 @@ public class SignInActivity extends AppCompatActivity {
     Button signInBtn;
     EditText userNameEditText, passwordEditText;
     DatabseHelper databseHelper;
+    NotificationCompat.Builder notification;
+    private static final int unique_Id = 45612;
+    private  UserInfo user;
 
 
     int personID;
@@ -37,7 +41,14 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_main);
+        //for notification
+        notification = new NotificationCompat.Builder(this);
+        notification.setAutoCancel(true);
+       // getWelcomeNotification();
+
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         dontHaveAccountTV = (TextView) findViewById(R.id.donthvTV);
         signInBtn = (Button) findViewById(R.id.signInBtn);
@@ -63,15 +74,22 @@ public class SignInActivity extends AppCompatActivity {
 
          String givenUserName = userNameEditText.getText().toString().trim();
          String givenPassword = passwordEditText.getText().toString().trim();
-        UserInfo user =databseHelper.receivingDatafromUserInfoTable(givenUserName,givenPassword);
+        try {
+             user = databseHelper.receivingDatafromUserInfoTable(givenUserName, givenPassword);
+        }catch(Exception e){
+            Toast.makeText(this, "Please Sign Up", Toast.LENGTH_LONG).show();
+        }
         userName = user.getUserName();
         userpassword = user.getPassword();
 
         if(isUsernameAndPasswordMatched(givenUserName,givenPassword)){
            Intent intent = new Intent(SignInActivity.this,DashBoardActivity.class);
-            intent.putExtra(USER_NAME,userName);
 
+          String [] data = {user.getUserName().toString(),user.getShopOwneName().toString()};
 
+            intent.putExtra(USER_NAME,data);
+
+           // getWelcomeNotification();
 
             startActivity(intent);
             finish();
@@ -94,6 +112,24 @@ public class SignInActivity extends AppCompatActivity {
             return false;
         }
     }
+   /* private void getWelcomeNotification() {
+        //Biuilding the notification
+        notification.setSmallIcon(R.mipmap.ic_launcher);
+        notification.setTicker("This Is Ticker");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("Here is the title");
+        notification.setContentText("I am the body text of yor notification");
+
+        Intent intent = new Intent(this,DashBoardActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+        //Build The Notification and issue It
+
+        NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(unique_Id,notification.build());
+    }
+*/
 
 
 

@@ -18,7 +18,7 @@
     <ImageView
         android:id="@+id/logoID"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/r8"
+        android:background="@drawable/signin"
 
 
         android:layout_marginTop="20dp"
@@ -42,7 +42,7 @@
            android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:hint="User Name"
+            android:hint="  User Name"
 
             android:textColor="#FFFFFF"
             android:background="@drawable/edittextshape"

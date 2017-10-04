@@ -28,9 +28,11 @@
         <EditText
             android:id="@+id/productNameET"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
+            android:textColor="#fff"
+            android:gravity="center"
             android:layout_toRightOf="@id/productNameTV"
-            android:background="@drawable/box"/>
+            android:background="@drawable/edittextshape"/>
 
         <TextView
             android:id="@+id/productsIdTV"
@@ -40,15 +42,17 @@
             android:text="Product ID"
             android:layout_marginRight="5dp"
             android:layout_below="@id/productNameTV"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="20dp"/>
         <EditText
             android:id="@+id/productIdET"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
+            android:textColor="#fff"
             android:layout_toRightOf="@id/productNameTV"
-            android:background="@drawable/box"
+            android:background="@drawable/edittextshape"
+            android:gravity="center"
             android:layout_below="@id/productNameET"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="10dp"/>
 
         <LinearLayout
             android:id="@+id/quantityLL"
@@ -62,24 +66,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
                 android:textColor="#FFF"
                 android:text="Quantity"/>
 
             <EditText
                 android:id="@+id/quantityET"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:layout_weight="2"
-                android:background="@drawable/box"
+                android:textColor="#fff"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:background="@drawable/edittextshape"
                 />
 
             <EditText
                 android:id="@+id/unitET"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:layout_marginLeft="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/box"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittextshape"
                />
 
         </LinearLayout>
@@ -91,15 +102,17 @@
             android:text="Price"
             android:layout_marginRight="5dp"
             android:layout_below="@id/quantityLL"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="15dp"/>
         <EditText
             android:id="@+id/priceET"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textColor="#fff"
             android:layout_toRightOf="@id/productNameTV"
-            android:background="@drawable/box"
+            android:background="@drawable/edittextshape"
             android:layout_below="@id/quantityLL"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="10dp"/>
         <TextView
             android:id="@+id/alertTV"
             android:layout_width="wrap_content"
@@ -112,9 +125,11 @@
         <EditText
             android:id="@+id/alertET"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textColor="#fff"
             android:layout_toRightOf="@id/productNameTV"
-            android:background="@drawable/box"
+            android:background="@drawable/edittextshape"
             android:layout_below="@id/priceTV"
             android:layout_marginTop="15dp"/>
 

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.android.quickinventoryapp.BaseClasses.CustomerInfo;
 import com.example.android.quickinventoryapp.BaseClasses.HistoryInfo;
+import com.example.android.quickinventoryapp.BaseClasses.NotificationMessage;
 import com.example.android.quickinventoryapp.BaseClasses.ProductInfo;
 import com.example.android.quickinventoryapp.BaseClasses.UserInfo;
 
@@ -63,6 +64,11 @@ public class DatabseHelper extends SQLiteOpenHelper {
     private static final String HISTORYTABLE_TOTAL_PRICE="totalPrice";
     private static final String HISTORY_TABLE_USER_NAME = "user_name";
 
+    private static final String NOTIFICATION_TABLE = "notificationtable";
+    private static final String _ID3 = "id";
+    private static final String NOTIFICATION ="notification";
+    private static final String NOTIFICATION_TABLE_USER_NAME = "username";
+
 
 
     private String CREATE_SIGN_UP_TABLE ="CREATE TABLE "+TABLE_NAME+" ("+UID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -78,10 +84,13 @@ public class DatabseHelper extends SQLiteOpenHelper {
     private  String CREATE_HISTORY_TABLE = "CREATE TABLE "+HISTORY_TABLE+" ("+_ID2+" INTEGER PRIMARY KEY AUTOINCREMENT, "
             + HISTORYTABLE_CUSTOMER_NAME +" TEXT NOT NULL, "+HISTORYTABLE_PRODUCT_NAME+" TEXT NOT NULL, "+HISTORYTABLE_QUANTITY+" TEXT NOT NULL, "+HISTORYTABLE_DATE+" TEXT NOT NULL, "+HISTORYTABLE_TOTAL_PRICE+" TEXT NOT NULL, "+HISTORY_TABLE_USER_NAME+" TEXT NOT NULL"+");";
 
+    private String CREATE_NOTIFICATION_TABLE ="CREATE TABLE "+NOTIFICATION_TABLE+" ("+_ID3+" INTEGER PRIMARY KEY AUTOINCREMENT, "+NOTIFICATION+" TEXT NOT NULL, "+NOTIFICATION_TABLE_USER_NAME+" TEXT NOT NULL"+");";
+
     private String DROP_SIGN_UP_TABLE = "DROP TABLE IF EXISTS "+TABLE_NAME;
     private  String DROP_CUTOMERS_INFO_TABLE ="DROP TABLE IF EXISTS "+ CUSTOMER_TABLE;
     private  String DROP_PRODUCT_INFO_TABLE ="DROP TABLE IF EXISTS "+ PRODUCT_TABLE;
     private String DROP_HISTORY_TABLE = "DROP TABLE IF EXISTS "+HISTORY_TABLE;
+    private String DROP_NOTIFICATION_TABLE = "DROP TABLE IF EXISTS "+NOTIFICATION_TABLE;
 
     Context context;
 
@@ -94,12 +103,13 @@ public class DatabseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        Toast.makeText(context,"ONCREATE IS CALLED",Toast.LENGTH_LONG).show();
+//        Toast.makeText(context,"ONCREATE IS CALLED",Toast.LENGTH_LONG).show();
         try {
             db.execSQL(CREATE_SIGN_UP_TABLE);
             db.execSQL(CREATE_CUSTOMERS_INFO_TABLE);
             db.execSQL(CREATE_PRODUCTS_INFO_TABLE);
             db.execSQL(CREATE_HISTORY_TABLE);
+            db.execSQL(CREATE_NOTIFICATION_TABLE);
 
         }catch (Exception e){
             Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
@@ -114,6 +124,7 @@ public class DatabseHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_CUTOMERS_INFO_TABLE);
         db.execSQL(DROP_PRODUCT_INFO_TABLE);
         db.execSQL(DROP_HISTORY_TABLE);
+        db.execSQL(DROP_NOTIFICATION_TABLE);
         onCreate(db);
 
 
@@ -131,6 +142,16 @@ public class DatabseHelper extends SQLiteOpenHelper {
       long id=  database.insert(TABLE_NAME,null,contentValues);
         return id;
 
+    }
+
+    public long insertNotificationMessage(NotificationMessage message,String uName){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NOTIFICATION,message.getMessgae());
+        contentValues.put(NOTIFICATION_TABLE_USER_NAME,uName);
+
+        long id = database.insert(NOTIFICATION_TABLE,null,contentValues);
+        return id;
     }
 
     public long insertHistory(HistoryInfo historyInfo,String userName){
@@ -229,6 +250,8 @@ public class DatabseHelper extends SQLiteOpenHelper {
 
         return list;
     }
+
+
     public List<HistoryInfo> getAllHsitory(String userName){
         List<HistoryInfo> history = new ArrayList<>();
 
@@ -338,12 +361,53 @@ public class DatabseHelper extends SQLiteOpenHelper {
         return products;
     }
 
+    public List<NotificationMessage> getAllNotificationMessage(String uName){
+        List<NotificationMessage> messages = new ArrayList<>();
+        SQLiteDatabase database = this.getReadableDatabase();
+        String[] columns ={_ID3,NOTIFICATION,NOTIFICATION_TABLE_USER_NAME};
+        String[] selection = {uName};
+
+        Cursor cursor = database.query(NOTIFICATION_TABLE,columns,NOTIFICATION_TABLE_USER_NAME+" =?",selection,null,null,null);
+        while (cursor.moveToNext()){
+            int index0 = cursor.getColumnIndex(_ID3);
+            int index1 = cursor.getColumnIndex(NOTIFICATION);
+            int index2 = cursor.getColumnIndex(NOTIFICATION_TABLE_USER_NAME);
+
+            messages.add(new NotificationMessage(cursor.getString(index1),cursor.getString(index0)));
+        }
+        return messages;
+    }
+
     public int deleteAProduct(String name,String productid,String userName){
         SQLiteDatabase db = this.getWritableDatabase();
         String[] whereClause = {name,productid,userName};
         int id= db.delete(PRODUCT_TABLE,PRODUCT_NAME+ " =? and "+PRODUCT_ID+" =? and "+PRODUCT_TABLE_USER_NAME+" =?",whereClause);
         return id;
 
+    }
+
+    public int deleteAllNotification(String uName){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String[] whereClause = {uName};
+
+        int id = database.delete(NOTIFICATION_TABLE,NOTIFICATION_TABLE_USER_NAME+ " =?",whereClause);
+        return id;
+    }
+
+    public int deleteAllHistory(String uName){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String[] whereClause = {uName};
+
+        int id = database.delete(HISTORY_TABLE,HISTORY_TABLE_USER_NAME+ " =?",whereClause);
+        return id;
+    }
+
+
+    public int deleteNotification(String id,String uName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] whereClause = {String.valueOf(id),uName};
+        int row = db.delete(NOTIFICATION_TABLE,_ID3+ " =? and "+NOTIFICATION_TABLE_USER_NAME+" =?",whereClause);
+        return row;
     }
 
     public ProductInfo getProduct(String productName,String productId,String userName){
@@ -377,14 +441,34 @@ public class DatabseHelper extends SQLiteOpenHelper {
         return productInfo;
     }
 
-    public void updateProductQuantity(String name,String newValue,String prevValue,String userName){
+    public int updateProductQuantity(String name,String newValue,String prevValue,String userName){
         int value = Integer.parseInt(prevValue)-Integer.parseInt(newValue);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(QUANTITY,value);
         String[] whereArgs = {name,userName};
         db.update(PRODUCT_TABLE,contentValues,PRODUCT_NAME+" =? AND "+PRODUCT_TABLE_USER_NAME+" =?",whereArgs);
+        return value;
 
+    }
+
+    public int addProductQuantity(String name,String newValue,String prevValue,String uName){
+        int value = Integer.parseInt(prevValue)+Integer.parseInt(newValue);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(QUANTITY,value);
+        String[] whereArgs = {name,uName};
+       int r= db.update(PRODUCT_TABLE,contentValues,PRODUCT_NAME+" =? AND "+PRODUCT_TABLE_USER_NAME+" =?",whereArgs);
+        return value;
+    }
+
+    public int updateProductPrice(String name,String newPrice,String uName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PRICE,newPrice);
+        String[] whereArgs = {name,uName};
+       int r = db.update(PRODUCT_TABLE,contentValues,PRODUCT_NAME+" =? AND "+PRODUCT_TABLE_USER_NAME+" =?",whereArgs);
+        return r;
     }
 
 

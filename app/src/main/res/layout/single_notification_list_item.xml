@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:divider="#3e8161"
+    android:dividerHeight="0.9dp"
+    android:background="@drawable/history_shape">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/notificationNumberTV"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textColor="#f74141"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/messageTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fcfcfc"
+            android:layout_below="@id/notificationNumberTV"
+            android:text=""
+            android:layout_marginRight="5dp"
+            android:textSize="15dp"/>
+
+
+    </RelativeLayout>
+</RelativeLayout>

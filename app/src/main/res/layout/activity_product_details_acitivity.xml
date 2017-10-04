@@ -26,7 +26,7 @@
                android:id="@+id/productNameTV"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Product Name :"
+               android:text="Product Name "
                android:textColor="#FFF"/>
             <TextView
                 android:id="@+id/productNameDetailsTV"
@@ -40,7 +40,7 @@
                 android:id="@+id/productIDTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product ID        :"
+                android:text="Product ID        "
                 android:textColor="#FFF"
                 android:layout_below="@id/productNameTV"/>
             <TextView
@@ -56,7 +56,7 @@
                 android:id="@+id/quantityTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quantity            :"
+                android:text="Quantity            "
                 android:textColor="#FFF"
                 android:layout_below="@id/productIDTV"/>
             <TextView
@@ -73,7 +73,7 @@
                 android:id="@+id/priceTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price                   :"
+                android:text="Price                   "
                 android:textColor="#FFF"
                 android:layout_below="@id/quantityDetailsTV"/>
             <TextView
@@ -91,17 +91,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+
                 android:layout_below="@+id/priceTV">
                 <Button
                     android:id="@+id/deleteButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAllCaps="false"
                     android:background="@drawable/buttonshape"
                     android:text=" Delete this Product "
                     android:textColor="#FFF"
 
                    />
+                <Button
+                    android:id="@+id/updateInfoBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update Info"
+                    android:background="@drawable/buttonshape"
+                    android:textAllCaps="false"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#fff"
+                    android:layout_toRightOf="@id/deleteButton"
+                    android:layout_marginLeft="25dp"/>
 
 
             </RelativeLayout>
