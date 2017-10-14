@@ -1,8 +1,6 @@
 package com.example.android.quickinventoryapp.BaseClasses;
 
-/**
- * Created by rafiqul islam on 10/3/2017.
- */
+
 
 public class NotificationMessage {
     private String Messgae;

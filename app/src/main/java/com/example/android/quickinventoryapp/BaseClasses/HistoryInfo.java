@@ -1,8 +1,5 @@
 package com.example.android.quickinventoryapp.BaseClasses;
 
-/**
- * Created by rafiqul islam on 9/28/2017.
- */
 
 public class HistoryInfo {
     private String customerName;

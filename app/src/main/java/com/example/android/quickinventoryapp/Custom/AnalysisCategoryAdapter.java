@@ -12,9 +12,7 @@ import com.example.android.quickinventoryapp.R;
 
 import java.util.List;
 
-/**
- * Created by rafiqul islam on 9/30/2017.
- */
+
 
 public class AnalysisCategoryAdapter extends ArrayAdapter<String> {
     List<String> catgories;

@@ -13,9 +13,7 @@ import com.example.android.quickinventoryapp.R;
 
 import java.util.List;
 
-/**
- * Created by rafiqul islam on 9/29/2017.
- */
+
 
 public class HistoryAdapter extends ArrayAdapter<String> {
 
